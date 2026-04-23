@@ -16,6 +16,7 @@ In this case, 'identifiers' refers to `rownames` and conditions might be "gene s
 
 `scuttle_addpercellqcmetrics`
 Adds per-cell quality metrics in the `colData` component of a `SingleCellExperiment` object.
+This tool accepts optional lists of genes (e.g. mitochondrial) given as separate text files.
 
 `singlecellexperiment_display`
 Produce a text file that display aspects of a `SingleCellExperiment`.
