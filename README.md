@@ -14,8 +14,11 @@ In order of usage within a workflow:
 Produce a text file listing the identifiers of genes that match a set of conditions.
 In this case, 'identifiers' refers to `rownames` and conditions might be "gene symbol matches a pattern".
 
+`scuttle_addpercellqcmetrics`
+Adds per-cell quality metrics in the `colData` component of a `SingleCellExperiment` object.
+
 `singlecellexperiment_display`
-Produce a text file that display aspects of a SingleCellExperiment.
+Produce a text file that display aspects of a `SingleCellExperiment`.
 In this case, 'aspects' might be the `colData` or `rowData`.
 Future plan includes the full object's summary view, as in `print(sce`.
 
