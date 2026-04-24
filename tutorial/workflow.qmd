@@ -1,0 +1,173 @@
+---
+title: "GTN tutorial"
+format: html
+---
+
+```{r}
+#| message: false
+library(DropletUtils)
+library(scater)
+library(scran)
+```
+
+## Data
+
+### Data download
+
+```{r}
+#| eval: false
+download.file("https://zenodo.org/record/3581213/files/genes.tsv", "data/genes.tsv")
+download.file("https://zenodo.org/record/3581213/files/barcodes.tsv", "data/barcodes.tsv")
+download.file("https://zenodo.org/record/3581213/files/matrix.mtx", "data/matrix.mtx")
+```
+
+### Create a SingleCellExperiment object
+
+```{r}
+sce <- read10xCounts(samples = "data")
+```
+
+### Inspect the SingleCellExperiment object
+
+```{r}
+sce
+```
+
+## Preprocessing
+
+### Calculate quality control metrics
+
+```{r}
+sce <- scuttle::addPerCellQCMetrics(
+  x = sce,
+  subsets = list(MT = grep(pattern = "^MT-", x = rowData(sce)$Symbol))
+)
+# colData(sce)
+```
+
+
+### Basic filters
+
+“Include features detected in at least this many cells”: 3
+“Include cells where at least this many features are detected”: 200
+
+```{r}
+colData(sce)
+```
+
+### Visualise QC Metrics
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "detected"
+)
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "sum"
+)
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "subsets_MT_percent"
+)
+```
+
+```{r}
+scater::plotColData(
+  object = sce,
+  x = "sum",
+  y = "detected"
+)
+```
+
+```{r}
+scater::plotColData(
+  object = sce,
+  x = "sum",
+  y = "subsets_MT_percent"
+)
+```
+
+### Filter Out Low Quality Cells
+
+“Minimum nFeature_RNA”: 200
+“Maximum nFeature_RNA”: 2500
+“Maximum percent.mt”: 5.0
+“Filter by a different metric”: No
+
+```{r}
+sce <- sce[, sce$detected >= 200 & sce$detected <= 2500 & sce$subsets_MT_percent <= 5]
+sce
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "detected"
+)
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "sum"
+)
+```
+
+```{r}
+#| fig-width: 3
+#| fig-height: 5
+scater::plotColData(
+  object = sce,
+  y = "subsets_MT_percent"
+)
+```
+
+```{r}
+scater::plotColData(
+  object = sce,
+  x = "sum",
+  y = "detected"
+)
+```
+
+```{r}
+scater::plotColData(
+  object = sce,
+  x = "sum",
+  y = "subsets_MT_percent"
+)
+```
+
+## Further Preprocessing
+
+### Normalisation
+
+```{r}
+sce <- scuttle::logNormCounts(x = sce)
+sce
+```
+
+### Identify highly variable genes
+
+```{r}
+dec <- scran::modelGeneVar(sce)
+hvgs <- scran::getTopHVGs(dec, n = 2000)
+```
+
