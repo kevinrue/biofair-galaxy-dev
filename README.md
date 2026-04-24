@@ -8,9 +8,9 @@ The tools being implemented in this project are designed to combine into a workf
 
 ## Tools
 
-In order of usage within a workflow:
+In expected order of usage within a tutorial:
 
-`singlecellexperiment_matchfeatures`
+`singlecellexperiment_selectfeatures`
 Produce a text file listing the identifiers of genes that match a set of conditions.
 In this case, 'identifiers' refers to `rownames` and conditions might be "gene symbol matches a pattern".
 
@@ -21,7 +21,7 @@ This tool accepts optional lists of genes (e.g. mitochondrial) given as separate
 `singlecellexperiment_display`
 Produce a text file that display aspects of a `SingleCellExperiment`.
 In this case, 'aspects' might be the `colData` or `rowData`.
-Future plan includes the full object's summary view, as in `print(sce`.
+Future plan includes the full object's summary view, as in `print(sce)`.
 
 ## News
 
