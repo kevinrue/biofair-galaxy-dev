@@ -8,7 +8,7 @@ The tools being implemented in this project are designed to combine into a workf
 
 ## Tools
 
-In expected order of usage within a tutorial:
+In expected order of usage within a tutorial summarised in [this notebook](tutorial/workflow.qmd):
 
 `singlecellexperiment_selectfeatures`
 Produce a text file listing the identifiers of genes that match a set of conditions.
@@ -22,6 +22,8 @@ This tool accepts optional lists of genes (e.g. mitochondrial) given as separate
 Produce a text file that display aspects of a `SingleCellExperiment`.
 In this case, 'aspects' might be the `colData` or `rowData`.
 Future plan includes the full object's summary view, as in `print(sce)`.
+
+
 
 ## News
 
