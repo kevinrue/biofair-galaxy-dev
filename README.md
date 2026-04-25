@@ -23,7 +23,9 @@ Produce a text file that display aspects of a `SingleCellExperiment`.
 In this case, 'aspects' might be the `colData` or `rowData`.
 Future plan includes the full object's summary view, as in `print(sce)`.
 
-
+`scater_plotcoldata`
+Produces a PNG figure of selected `colData` columns.
+Violin plot for one column, scatter plot for two columns.
 
 ## News
 
